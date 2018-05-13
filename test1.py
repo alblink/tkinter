@@ -301,30 +301,30 @@ from tkinter import *
 # 添加菜单项，这样等该菜单建立完毕，我们要把它作为另
 # 一个菜单项的子菜单，就需要使用 add_cascade 方法。
 
-root = Tk()
-menubar = Menu(root)
-fmenu = Menu(menubar)
-for item in ['新建', '打开', '保存', '另存为']:
-    fmenu.add_command(label = item)
-
-emenu = Menu(menubar)
-for item in ['复制','粘贴','剪切']:
-    emenu.add_command(label = item)
-
-vmenu = Menu(menubar)
-for item in ['默认视图', '新式视图']:
-    vmenu.add_command(label = item)
-
-amenu = Menu(menubar)
-for item in ['版权信息', '其他说明']:
-    amenu.add_command(label = item)
-
-menubar.add_cascade(label="文件", menu=fmenu)
-menubar.add_cascade(label="编辑", menu=emenu)
-menubar.add_cascade(label="视图", menu=vmenu)
-menubar.add_cascade(label="关于", menu=amenu)
-root['menu'] = menubar
-root.mainloop()
+# root = Tk()
+# menubar = Menu(root)
+# fmenu = Menu(menubar)
+# for item in ['新建', '打开', '保存', '另存为']:
+#     fmenu.add_command(label = item)
+#
+# emenu = Menu(menubar)
+# for item in ['复制','粘贴','剪切']:
+#     emenu.add_command(label = item)
+#
+# vmenu = Menu(menubar)
+# for item in ['默认视图', '新式视图']:
+#     vmenu.add_command(label = item)
+#
+# amenu = Menu(menubar)
+# for item in ['版权信息', '其他说明']:
+#     amenu.add_command(label = item)
+#
+# menubar.add_cascade(label="文件", menu=fmenu)
+# menubar.add_cascade(label="编辑", menu=emenu)
+# menubar.add_cascade(label="视图", menu=vmenu)
+# menubar.add_cascade(label="关于", menu=amenu)
+# root['menu'] = menubar
+# root.mainloop()
 
 # 要注意的是我们可以先把子菜单做好，然后再去做上层菜单。
 
@@ -349,10 +349,205 @@ root.mainloop()
 # 2.还记得用 bind 方法来绑定事件吗?而且要记得鼠标右键
 # 是用的<Button-3>。
 
+# def xin():
+#     global root
+#     Label(root, text = "I love Python").pack()
+#
+# root = Tk()
+# menubar = Menu(root)
+#
+# for x in ['vb', 'c', 'java', 'php']:
+#     menubar.add_command(label = x)
+#
+# menubar.add_command(label = 'python', command = xin)
+#
+# def pop(event):
+#     menubar.post(event.x_root, event.y_root)
+#
+#
+# root.bind("<Button-3>", pop)
+# root.mainloop()
+
+
+# ************分割线*******************
+# 1.有时候，一个菜单项的各个菜单可能并不是一个类型，
+# 有可能是两种类型，在它们中间可以插一个分割线来界定
+# 界限。
+# 2.插入分割线和插入正常的菜单项操作很相似，只是使用
+# 的方法是 add_separator，该方法无需参数。
+
+# root = Tk()
+# m = Menu(root)
+# m2 = Menu(m)
+# for item in ['python', 'perl', 'php', 'ruby']:
+#     m2.add_command(label = item)
+#
+# m2.add_separator()
+#
+# for item in ['java', 'c++', 'c']:
+#     m2.add_command(label = item)
+#
+# m.add_cascade(label = 'lan', menu = m2)
+# root['menu'] = m
+# root.mainloop()
+
+
+
+# **************checkbutton 与 radiobutton********
+# 1.checkbutton 原本是指“复选按钮”，radiobutton 原本
+# 是指“单选按钮”。
+# 辛星 2014 年度辛星 tkinter 教程第二版 tkinter
+# 48 / 103
+# 2.单选按钮与复选按钮是相对来说的，即在这一组中，单
+# 选按钮中只能有一个是被选定的，即一个人的性别是女的，
+# 就一定不是男的，但是复选按钮对应的情况则是可以有多
+# 个同时被选定，比如一个人即可以喜欢篮球，也可以喜欢
+# 足球，还有可能喜欢乒乓球，等等。
+# 3.在菜单中，也有类似的概念，即单选菜单和复选菜单。
+# 它们分别用 add_radiobutton 和 add_checkbutton 来分别
+# 添加。
+# 4.这两种菜单都是如果一旦被选定，那么前面会有一个类
+# 似于对号的标记出现，checkbutton 可以多个同时被选定，
+# 但是 radiobutton 却只能被选定一个，即这个被选定了，
+# 会自动取消前一个的选定。
+
+# root = Tk()
+# m = Menu(root)
+# m2 = Menu(m)
+# for item in ['python', 'perl', 'php', 'ruby']:
+#     m2.add_checkbutton(label = item)
+#     #  多选菜单
+#
+# m2.add_separator()
+#
+# for item in ['java', 'c++', 'c']:
+#     m2.add_radiobutton(label = item)
+#     # 单选菜单
+#
+# m.add_cascade(label = 'lan', menu = m2)
+# root['menu'] = m
+# root.mainloop()
+
+
+# 第八节：对话框和消息框
+# ***********对话框****************
+# 1.说到对话框，我感觉这可是个最有内容可写的话题了，
+# 因为我早前在学习 MFC 的时候，基本上刚开始学习的时候
+# 每次构建的应用程序都是基于对话框的，扯远了。
+# 2.在 tkinter 中的对话框，一定要注意自己的版本，因为
+# Python2 和 Python3 中关于对话框的变化到没有多大，但是
+# 关于引用的格式差别很大，即我们的 import 的时候，
+# Python2 和 Python3 有很大差别，具体请参照我第零节的文
+# 件目录去导入。
+# *************关于该节************
+# 1.可能在别的编程语言中，对话框是一种编程模式，至少
+# 在我学习的 MFC 和 Qt 中都还是蛮重要的。
+# 2.但是在 tkinter 中，对话框的地位略有下降，我也不计
+# 划讲的特别深，如果读者有兴趣，可以深入到源代码中研
+# 究下，或者参考别的资料。
+# ***********对话框************
+# 1.关于对话框，tkinter 有它自己的布局，在 Python 的安
+# 装目录下的 Lib 文件夹的 tkinter 子文件夹下，有个
+# dialog.py，它只有 2KB，它就是我们要介绍的重点。
+# 2.打开该文件，只有五十行，还包括用来测试的代码，里
+# 面只有一个 Dialog 类，它继承自 Widget,它的方法也很简
+# 单，基本上也就一个__init__方法有实质性内容，下面的
+# _test 是用来测试的。
+# 3.该类可用的属性很少，基本上真正比较好用的也就一个
+# num 属性了，它用于返回用户的点击。
+# 4.我们可以通过它给出的例子来模仿写出一个对话框，注
+# 意它的 title 属性，text 属性，strings 属性。
+
+# from tkinter.dialog import *
+#
+# def xin():
+#     d = Dialog(None, title = "2014辛星", text = "2014年度辛星tkinter材料还满意吗？",
+#                bitmap = DIALOG_ICON, default = 0, strings = ("不满意", "还可以", "很满意"))
+#     print(d.num)
+#
+# t = Button(None, text = "辛星调查", command = xin)
+# t.pack()
+# b = Button(None, text = "关闭", command = t.quit)
+# b.pack()
+# t.mainloop()
+
+
+# ***********其他对话框****************
+# 1.其实我们也看到了，由于源代码中给出的关于对话框的
+# 代码过于简短，真正用起来并不方便。
+# 2.于是，根据使用频率，源代码又给出了几个标准对话框，
+# 比如 simpledialog（简单对话框），commondialog（一般
+# 对话框），filedialog（文件对话框），其实
+# colorchooser 也算对话框的内容。
+# 3.我看了下它们的源代码，但是考虑到我们的程序的主要
+# 用途，所以就不在此节深入介绍了，具体的大家可以深入
+# 源代码一探究竟，或许在后续版本中会添加对它的进一步
+# 介绍。
 
 
 
 
+# **************消息框****************
+
+# from tkinter.messagebox import *
+# showinfo(title="2014辛星", message="点燃梦想，就在现在")
+
+
+
+
+
+# 第九节：常用控件介绍
+# ************控件**************
+# 1.在前面几节中，介绍了几个简单的控件，比如标签，比
+# 如按钮，比如输入框等等。
+# 2.说实话，标准的 tkinter 中给出的控件数目并不多，只
+# 有 21 个，虽然后来的 ttk 中又增加了几个，但是还是跟不
+# 上需要。关于 ttk 后面会介绍。
+# 3.但是这里还是介绍下常用的控件把，毕竟这些控件还是
+# 蛮重要的。
+# ***********复选按钮******************
+# 1.复选按钮就是 Checkbutton 类，它的实例化和 Button 很
+# 相似。
+# 2.既然是按钮，那就可以有 command 属性，该属性可以对
+# 应到一个函数上去来执行某些功能。
+# 3.复选框通常是用来选择信息的时候的一种选择，它前面
+# 有个小正方形的方块，如果选中则有一个对号，也可以再
+# 次点击以取消该对号来取消选中。
+# **************复选框代码实例***************
+
+# time1 = 0
+# time2 = 0
+# def xin1():
+#     global l, c1, time1
+#     if time1 % 2 == 0:
+#         time1 += 1
+#         l['text'] = "a被选中"
+#     else:
+#         time1 += 1
+#         l['text'] = "a被取消"
+#
+# def xin2():
+#     global l, c2, time2
+#     if time2 % 2 == 0:
+#         time2 += 1
+#         l['text'] = "b被选中"
+#     else:
+#         time2 += 1
+#         l['text'] = "b被取消"
+#
+# root = Tk()
+# c1 = Checkbutton(root, text = 'a', command = xin1)
+# c1.pack()
+# c2 = Checkbutton(root, text = 'b', command = xin2)
+# c2.pack()
+# l = Label(root, text = '     ')
+# l.pack()
+# root.mainloop()
+
+# ************单选框***************
+# 1.单选框和复选框非常相似，只是把 Checkbutton 换成
+# Radiobutton。
+# 2.我就不代码示例了，因为实在是太相似且简单了。
 
 
 
