@@ -9,6 +9,7 @@
 
 
 from tkinter import *
+from tkinter.ttk import *
 import random
 import threading
 import queue
@@ -22,8 +23,8 @@ class GUI(Tk):
         self.is_game_over = False
         self.canvas = Canvas(self, width=495, height=305, bg='#000000')
         self.canvas.pack()
-        self.snake = self.canvas.create_line((0, 0), (0, 0), fill='#FFCC4C', width=10)
-        self.food = self.canvas.create_rectangle(0, 0, 0, 0, fill='#FFCC4C', outline='#FFCC4C')
+        self.snake = self.canvas.create_line((0, 0), (0, 0), fill='#FFCC4C', width=10)    # 画蛇
+        self.food = self.canvas.create_rectangle(0, 0, 0, 0, fill='#FF0000', outline='#FFCC4C')   # 画出食物  fill为填充色 outline为边框颜色
         self.points_earned = self.canvas.create_text(455, 15, fill='white', text='score:0')
         self.queue_handler()
 
@@ -101,6 +102,7 @@ class Snake(threading.Thread):
             self.check_game_over(new_snake_point)
             self.snake_points.append(new_snake_point)
 
+    # 对蛇
     def calculate_new_coordinates(self):
         last_x, last_y = self.snake_points[-1]
         if self.direction == 'Up':
