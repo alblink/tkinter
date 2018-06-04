@@ -37,11 +37,11 @@ def myopen():
         # eg:
         # path = 'D:\CSDN'
         # os.path.basename(path) = CSDN
-        root.title('记事本  '+os.path.basename(filename))
+        root.title('记事本  '+os.path.basename(filename))   # 把标题换成 ‘记事本+文件名’ 的形式
         textPad.delete(1.0, END)
-        f = open(filename, "r")
-        textPad.insert(1.0, f.read())
-        f.close()
+        f = open(filename, "r")   # 用绝对路径打开文件
+        textPad.insert(1.0, f.read())   # 将读到的内容放到text控件中
+        f.close()   # 关闭文件
 
 
 # 新建
@@ -109,7 +109,7 @@ def find():
     global root
     t = Toplevel(root)
     t.title("查找")
-    t.geometry("260x60+200+250")
+    t.geometry("260x60+200+250")    # 前两个为窗口的大小，后两个为窗口的位置
     t.transient(root)
     Label(t, text="查找：").grid(row = 0, column = 0, sticky = 'e')
     v = StringVar()
